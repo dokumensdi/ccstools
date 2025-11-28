@@ -50,6 +50,9 @@
         <label for="picName">PIC Pelanggan</label>
         <input type="text" id="picName" name="picName" required>
 
+        <label for="idCust">ID Cust</label>
+        <input type="text" id="idCust" name="idCust" required>
+
         <label for="address">Alamat</label>
         <textarea id="address" name="address" rows="3" required></textarea>
 
@@ -64,9 +67,6 @@
 
         <label for="pop">POP</label>
         <input type="text" id="pop" name="pop" required>
-
-        <label for="idCust">ID Cust</label>
-        <input type="text" id="idCust" name="idCust" required>
 
         <label for="issue">Indikasi Masalah</label>
         <textarea id="issue" name="issue" rows="2" required></textarea>
@@ -85,12 +85,12 @@
         function generateTemplate() {
             const ticketNumber = document.getElementById('ticketNumber').value;
             const picName = document.getElementById('picName').value;
+            const idCust = document.getElementById('idCust').value;
             const address = document.getElementById('address').value;
             const phone = document.getElementById('phone').value;
             const email = document.getElementById('email').value;
             const serviceType = document.getElementById('serviceType').value;
             const pop = document.getElementById('pop').value;
-            const idCust = document.getElementById('idCust').value;
             const issue = document.getElementById('issue').value;
             const filledBy = document.getElementById('filledBy').value;
 
@@ -129,6 +129,7 @@ ${filledBy}`;
     </script>
 </body>
 </html>
+
 
 
 
