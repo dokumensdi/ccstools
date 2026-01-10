@@ -1,0 +1,134 @@
+/* RESET RINGAN */
+* {
+    box-sizing: border-box;
+}
+
+/* BACKGROUND */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e9f1ff, #f8f9fa);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* CONTAINER CARD */
+body > h1,
+form,
+h2,
+.output {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* JUDUL */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* FORM CARD */
+form {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+}
+
+/* LABEL */
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #34495e;
+}
+
+/* INPUT, TEXTAREA, SELECT */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* FOCUS EFFECT */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+/* TEXTAREA */
+textarea {
+    resize: vertical;
+}
+
+/* BUTTON WRAPPER */
+form button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* BUTTON PRIMARY */
+form button:first-of-type {
+    background: #007BFF;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+form button:first-of-type:hover {
+    background: #0056b3;
+}
+
+/* BUTTON SECONDARY */
+form button:last-of-type {
+    background: #6c757d;
+    color: #ffffff;
+}
+
+form button:last-of-type:hover {
+    background: #5a6268;
+}
+
+/* OUTPUT TITLE */
+h2 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+/* OUTPUT BOX */
+.output {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid #007BFF;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    white-space: pre-wrap;
+    font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    form {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}
