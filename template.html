@@ -1,87 +1,161 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template Text Copier</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #A0B4D4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: #333;
-            padding: 20px;
-            border-radius: 8px;
-            width: 320px;
-            text-align: center;
-        }
-        .button-group {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
-            margin-bottom: 15px;
-        }
-        button {
-            background: #ccc;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .text-box {
-            background: white;
-            padding: 15px;
-            text-align: left;
-            min-height: 100px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            display: none;
-        }
-        .text-box textarea {
-            width: 100%;
-            height: 300px;
-            border: none;
-            outline: none;
-            font-size: 14px;
-            resize: none;
-        }
-        .copy-btn {
-            background: #ccc;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Template Text Copier</title>
+
+<style>
+:root {
+    --bg-main: #0f172a;
+    --bg-card: #111827;
+    --primary: #6366f1;
+    --secondary: #38bdf8;
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+    --border-soft: #1f2933;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f172a, #020617);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: var(--text-main);
+}
+
+.container {
+    background: var(--bg-card);
+    width: 360px;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.4);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.header {
+    text-align: center;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.header p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.button-group button {
+    background: #1f2937;
+    color: var(--text-main);
+    border: 1px solid var(--border-soft);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.button-group button:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.text-box {
+    display: none;
+    background: #020617;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.text-box textarea {
+    width: 100%;
+    height: 240px;
+    background: transparent;
+    border: none;
+    resize: none;
+    outline: none;
+    color: var(--text-main);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.copy-btn {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .15s ease, opacity .15s ease;
+}
+
+.copy-btn:hover {
+    transform: scale(1.02);
+    opacity: .95;
+}
+
+.footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
+    <div class="header">
+        <h2>Template Text Copier</h2>
+        <p>Fast reply & copy tool</p>
+    </div>
+
     <div class="button-group">
         <button onclick="showText(1)">Ganti WiFi 1</button>
         <button onclick="showText(2)">Ganti WiFi 2</button>
         <button onclick="showText(3)">Isi Data</button>
         <button onclick="showText(4)">Price List</button>
         <button onclick="showText(5)">Pass Huawei</button>
-        <button onclick="createTemplate()">Buat Template Baru</button>
+        <button onclick="createTemplate()">➕ Template Baru</button>
     </div>
 
     <div class="text-box" id="textBox">
-        <textarea id="textContent"></textarea>
+        <textarea id="textContent" placeholder="Teks template akan muncul di sini..."></textarea>
     </div>
 
-    <button class="copy-btn" onclick="copyText()">Copy</button>
+    <button class="copy-btn" onclick="copyText()">📋 Copy Text</button>
+
+    <div class="footer">
+        © Customer Care Service Zetta Jatim
+    </div>
 </div>
 
 <script>
-    const templates = {
-        1: `Berikut langkah-langkah mengganti password wifi secara mandiri kak
+const templates = {
+1: `Berikut langkah-langkah mengganti password wifi secara mandiri kak
 1. Masuk Google / Chrome (chrome/safari/dll)
 2. Masukan => 192.168.1.1 (Pastikan terhubung ke wifi yang akan diganti) 
 3. Username : admin  | Password : admin 
@@ -89,54 +163,47 @@
    * SSID Name (untuk ganti nama)
    * WPA Pre-Shared Key (untuk ganti password)
 5. Setelah ganti nama & password tekan submit`,
-
-        2: `Berikut untuk langkah-langkah mengganti password secara mandiri kak
+2: `Berikut untuk langkah-langkah mengganti password secara mandiri kak
 1. Buka Browser (chrome/safari/dll)
 2. Ketik : 192.168.1.1 (Pastikan terhubung ke wifi yang akan diganti)
 3. Masukkan username: user | password: user
 4. Pilih Network>WLAN>SSID Setting (untuk ganti nama WiFi)
 5. Pilih Network>WLAN>Security (untuk ganti password)
 6. Tekan Submit apabila sudah selesai`,
-
-        3: `Terkait pemasangan baru bisa diisikan data berikut terlebih dahulu kak, untuk dilakukan pengecekan coverage area:
+3: `Terkait pemasangan baru bisa diisikan data berikut terlebih dahulu kak, untuk dilakukan pengecekan coverage area:
 Nama:
 Nomor whatsapp :
 Alamat lengkap:
 Share location :`,
-
-        4: `Berikut untuk Price List layanan Internet Zetta :
+4: `Berikut untuk Price List layanan Internet Zetta :
 - Zetta up to 25 Mbps : Rp. 166.500/bulan
 - Zetta up to 50 Mbps : Rp. 222.000/bulan
 - Zetta up to 100 Mbps : Rp. 277.500/bulan
 (Biaya tersebut sudah ppn 11%)`,
-
-        5: `Ganti Passowrd Huawei
+5: `Ganti Passowrd Huawei
 username : Support
 password : theworldinyourhand
 
 username : admintelekom
 password : telekomadmin`
-    };
+};
 
-    function showText(index) {
-        document.getElementById("textContent").value = templates[index];
-        document.getElementById("textBox").style.display = "block";
-    }
+function showText(index) {
+    document.getElementById("textContent").value = templates[index];
+    document.getElementById("textBox").style.display = "block";
+}
 
-    function createTemplate() {
-        document.getElementById("textContent").value = "";
-        document.getElementById("textBox").style.display = "block";
-    }
+function createTemplate() {
+    document.getElementById("textContent").value = "";
+    document.getElementById("textBox").style.display = "block";
+}
 
-    function copyText() {
-        const text = document.getElementById("textContent").value;
-        navigator.clipboard.writeText(text).then(() => {
-            alert("Teks berhasil disalin!");
-        });
-    }
+function copyText() {
+    const text = document.getElementById("textContent").value;
+    if (!text) return;
+    navigator.clipboard.writeText(text);
+}
 </script>
 
 </body>
 </html>
-
-
