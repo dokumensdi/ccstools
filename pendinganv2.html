@@ -216,7 +216,7 @@ function addEntry() {
   div.innerHTML = `
     <input type="text" class="name">
     <input type="text" class="id">
-    <input type="date" class="date">
+    <input type="text" class="date">
   `;
   container.appendChild(div);
 }
@@ -231,7 +231,7 @@ function generateTemplate() {
   entries.forEach(entry => {
     const name = entry.querySelector('.name').value.trim();
     const id = entry.querySelector('.id').value.trim();
-    const date = entry.querySelector('.date').value;
+    const date = entry.querySelector('.text').value;
 
     if (name && id && date) {
       template += `${no}. ${id} - ${name} - ${date}\n`;
@@ -253,3 +253,4 @@ async function copyToClipboard() {
 
 </body>
 </html>
+
