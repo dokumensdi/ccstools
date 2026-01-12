@@ -1,102 +1,255 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Template Pendingan Maintenance</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 20px;
-    }
-    .entry {
-      margin-bottom: 10px;
-    }
-    textarea {
-      width: 100%;
-      height: 200px;
-      margin-top: 20px;
-    }
-    button {
-      margin: 10px 5px 10px 0;
-      padding: 8px 12px;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Pendingan Maintenance</title>
+
+<style>
+:root {
+  --bg: #0f172a;
+  --card: #020617;
+  --border: #1e293b;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-dark: #0284c7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  padding: 32px;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.header p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.table-header,
+.entry {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.2fr;
+  gap: 12px;
+}
+
+.table-header {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.entry {
+  margin-bottom: 10px;
+}
+
+input {
+  background: #020617;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background: #020617;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #020617;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+
+textarea {
+  width: 100%;
+  height: 220px;
+  background: #020617;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 16px;
+  color: var(--text);
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.footer {
+  margin-top: 30px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .table-header,
+  .entry {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <h2>Form Pendingan Maintenance</h2>
+<div class="container">
 
-  <div id="form-container">
-    <!-- Initial 4 entries -->
-    <div class="entry">
-      <input type="text" placeholder="Nama Pelanggan" class="name">
-      <input type="text" placeholder="ID Pelanggan" class="id">
-      <input type="text" placeholder="Tanggal Open" class="date">
+  <div class="header">
+    <h1>Pendingan Maintenance</h1>
+    <p>Form internal untuk rekap tiket maintenance yang masih open</p>
+  </div>
+
+  <div class="card">
+    <div class="table-header">
+      <div>Nama Pelanggan</div>
+      <div>ID Pelanggan</div>
+      <div>Tanggal Open</div>
     </div>
-    <div class="entry">
-      <input type="text" placeholder="Nama Pelanggan" class="name">
-      <input type="text" placeholder="ID Pelanggan" class="id">
-      <input type="text" placeholder="Tanggal Open" class="date">
+
+    <div id="form-container">
+      <div class="entry">
+        <input type="text" class="name" placeholder="ex: Ananda Bayu Setiawan">
+        <input type="text" class="id" placeholder="ex: 103010006">
+        <input type="text" class="date"
+placeholder="ex: DD MMM YYYY JJ:mm">
+      </div>
+      <div class="entry">
+        <input type="text" class="name">
+        <input type="text" class="id">
+        <input type="text" class="date">
+      </div>
+      <div class="entry">
+        <input type="text" class="name">
+        <input type="text" class="id">
+        <input type="text" class="date">
+      </div>
+      <div class="entry">
+        <input type="text" class="name">
+        <input type="text" class="id">
+        <input type="text" class="date">
+      </div>
     </div>
-    <div class="entry">
-      <input type="text" placeholder="Nama Pelanggan" class="name">
-      <input type="text" placeholder="ID Pelanggan" class="id">
-      <input type="text" placeholder="Tanggal Open" class="date">
-    </div>
-    <div class="entry">
-      <input type="text" placeholder="Nama Pelanggan" class="name">
-      <input type="text" placeholder="ID Pelanggan" class="id">
-      <input type="text" placeholder="Tanggal Open" class="date">
+
+    <div class="actions">
+      <button class="btn-secondary" onclick="addEntry()">+ Tambah Baris</button>
+      <button class="btn-secondary" onclick="generateTemplate()">Generate</button>
+      <button class="btn-primary" onclick="copyToClipboard()">Copy Template</button>
     </div>
   </div>
 
-  <button onclick="addEntry()">Tambah</button>
-  <button onclick="generateTemplate()">Submit</button>
-  <button onclick="copyToClipboard()">Copy Template</button>
+  <div class="card">
+    <textarea id="output" placeholder="Template hasil generate akan muncul di sini..."></textarea>
+  </div>
 
-  <textarea id="output" placeholder="Template akan muncul di sini..."></textarea>
+  <div class="footer">
+    Internal Maintenance Tool • Customer Care Service Jatim
+  </div>
 
-  <script>
-    function addEntry() {
-      const container = document.getElementById('form-container');
-      const div = document.createElement('div');
-      div.className = 'entry';
-      div.innerHTML = `
-        <input type="text" placeholder="Nama Pelanggan" class="name">
-        <input type="text" placeholder="ID Pelanggan" class="id">
-        <input type="text" placeholder="Tanggal Open" class="date">
-      `;
-      container.appendChild(div);
+</div>
+
+<script>
+function addEntry() {
+  const container = document.getElementById('form-container');
+  const div = document.createElement('div');
+  div.className = 'entry';
+  div.innerHTML = `
+    <input type="text" class="name">
+    <input type="text" class="id">
+    <input type="date" class="date">
+  `;
+  container.appendChild(div);
+}
+
+function generateTemplate() {
+  const entries = document.querySelectorAll('.entry');
+  let template =
+    "Dear Team Project,\n" +
+    "Izin untuk menyampaikan pendingan maintenance\n\n";
+
+  let no = 1;
+  entries.forEach(entry => {
+    const name = entry.querySelector('.name').value.trim();
+    const id = entry.querySelector('.id').value.trim();
+    const date = entry.querySelector('.date').value;
+
+    if (name && id && date) {
+      template += `${no}. ${id} - ${name} - ${date}\n`;
+      no++;
     }
+  });
 
-    function generateTemplate() {
-      const names = document.querySelectorAll('.name');
-      const ids = document.querySelectorAll('.id');
-      const dates = document.querySelectorAll('.date');
-      let template = "Dear Team Project,\nIzin untuk menyampaikan pendingan maintenance\n\n";
+  template += "\nDemikian kami sampaikan,\nTerimakasih";
+  document.getElementById('output').value = template;
+}
 
-      for (let i = 0; i < names.length; i++) {
-        const name = names[i].value.trim();
-        const id = ids[i].value.trim();
-        const date = dates[i].value.trim();
-        if (name && id && date) {
-          template += `${i + 1}. ${id} - ${name} - ${date}\n`;
-        }
-      }
-
-      template += "\nDemikian kami sampaikan,\nTerimakasih";
-      document.getElementById('output').value = template;
-    }
-
-    function copyToClipboard() {
-      const textArea = document.getElementById('output');
-      textArea.select();
-      textArea.setSelectionRange(0, 99999); // For mobile
-      document.execCommand("copy");
-      alert("Template disalin!");
-    }
-  </script>
+async function copyToClipboard() {
+  const text = document.getElementById('output').value;
+  if (!text) return alert("Template masih kosong");
+  await navigator.clipboard.writeText(text);
+  alert("Template berhasil disalin");
+}
+</script>
 
 </body>
 </html>
