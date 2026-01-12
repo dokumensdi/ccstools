@@ -169,25 +169,24 @@ textarea {
 
     <div id="form-container">
       <div class="entry">
-        <input type="text" class="name" placeholder="ex: Ananda Bayu Setiawan">
-        <input type="text" class="id" placeholder="ex: 103010006">
-        <input type="text" class="date"
-placeholder="ex: DD MMM YYYY JJ:mm">
+        <input type="text" class="name" placeholder="Contoh: PT Nusantara Jaya">
+        <input type="text" class="id" placeholder="CID-000123">
+        <input type="date" class="date">
       </div>
       <div class="entry">
         <input type="text" class="name">
         <input type="text" class="id">
-        <input type="text" class="date">
+        <input type="date" class="date">
       </div>
       <div class="entry">
         <input type="text" class="name">
         <input type="text" class="id">
-        <input type="text" class="date">
+        <input type="date" class="date">
       </div>
       <div class="entry">
         <input type="text" class="name">
         <input type="text" class="id">
-        <input type="text" class="date">
+        <input type="date" class="date">
       </div>
     </div>
 
@@ -203,7 +202,7 @@ placeholder="ex: DD MMM YYYY JJ:mm">
   </div>
 
   <div class="footer">
-    Internal Maintenance Tool • Customer Care Service Jatim
+    Internal Maintenance Tool • ISP Operations
   </div>
 
 </div>
@@ -216,7 +215,7 @@ function addEntry() {
   div.innerHTML = `
     <input type="text" class="name">
     <input type="text" class="id">
-    <input type="text" class="date">
+    <input type="date" class="date">
   `;
   container.appendChild(div);
 }
@@ -231,7 +230,7 @@ function generateTemplate() {
   entries.forEach(entry => {
     const name = entry.querySelector('.name').value.trim();
     const id = entry.querySelector('.id').value.trim();
-    const date = entry.querySelector('.text').value;
+    const date = entry.querySelector('.date').value;
 
     if (name && id && date) {
       template += `${no}. ${id} - ${name} - ${date}\n`;
@@ -253,4 +252,3 @@ async function copyToClipboard() {
 
 </body>
 </html>
-
