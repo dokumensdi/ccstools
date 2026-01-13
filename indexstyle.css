@@ -1,91 +1,95 @@
 * {
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
   margin: 0;
-  background: #0f2537;
-  color: #ffffff;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0c2236, #071826);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
+  width: 100%;
   max-width: 900px;
-  margin: 0 auto;
   padding: 40px 20px;
-}
-
-/* ===== HEADER ===== */
-header {
   text-align: center;
-  margin-bottom: 50px;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 36px;
-  font-weight: 700;
+h1 {
+  margin-bottom: 5px;
+  font-size: 2.4rem;
 }
 
-header p {
-  margin-top: 10px;
-  color: #b8d4e6;
+.subtitle {
+  margin-bottom: 40px;
+  color: #cfd8e3;
 }
 
-/* ===== GRID ===== */
-.tool-grid {
+.grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
 }
 
-/* ===== BUTTON ===== */
-.tool-btn {
+.tool {
   display: flex;
   align-items: center;
-  height: 80px;
-  padding: 0 30px;
+  gap: 15px;
+  padding: 22px 30px;
   border-radius: 50px;
-  color: #fff;
   text-decoration: none;
-  font-size: 20px;
+  color: #fff;
+  font-size: 1.1rem;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.tool-btn .icon {
-  font-size: 28px;
-  margin-right: 20px;
+.tool:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-.tool-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.4);
-}
-
-/* ===== GRADIENT VARIANTS ===== */
-.billing {
+/* Warna tombol */
+.blue {
   background: linear-gradient(90deg, #00c6ff, #0072ff);
 }
 
-.tiket {
+.red {
   background: linear-gradient(90deg, #ff416c, #ff4b2b);
 }
 
-.pendingan {
-  background: linear-gradient(90deg, #f7971e, #ffd200);
-  color: #1b1b1b;
+.yellow {
+  background: linear-gradient(90deg, #f9d423, #ffb347);
+  color: #2b2b2b;
 }
 
-.edukasi {
-  background: linear-gradient(90deg, #8e2de2, #4a00e0);
+.purple {
+  background: linear-gradient(90deg, #7f00ff, #5f2cff);
 }
 
-/* ===== FOOTER ===== */
 footer {
-  text-align: center;
-  margin-top: 60px;
-  font-size: 14px;
-  color: #9fbcd1;
+  margin-top: 40px;
+  font-size: 0.85rem;
+  color: #9fb3c8;
+}
+
+/* 📱 Mobile Version */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .tool {
+    font-size: 1rem;
+    padding: 20px;
+  }
 }
