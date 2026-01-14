@@ -72,6 +72,9 @@
         <label for="issue">Indikasi Masalah:</label>
         <textarea id="issue" name="issue" rows="2" required></textarea>
 
+        <label for="location">📍</label>
+        <textarea id="location" name="location" name="location" required></textarea>
+
         <label for="filledBy">Nama Pengisi Form:</label>
         <input type="text" id="filledBy" name="filledBy" required>
 
@@ -93,6 +96,7 @@
             const serviceType = document.getElementById('serviceType').value;
             const pop = document.getElementById('pop').value;
             const issue = document.getElementById('issue').value;
+            const location = document.getElementById('location').value;
             const filledBy = document.getElementById('filledBy').value;
 
             const template = `Dear team,
@@ -109,6 +113,8 @@ Nomor tiket: ${ticketNumber}
 - POP: ${pop}
 
 Keluhan: ${issue}
+
+📍${location}
 
 Demikian kami sampaikan,
 terima kasih
@@ -130,6 +136,7 @@ ${filledBy}`;
     </script>
 </body>
 </html>
+
 
 
 
