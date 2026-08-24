@@ -72,6 +72,10 @@ h1 {
   background: linear-gradient(90deg, #7f00ff, #5f2cff);
 }
 
+.green {
+  background: linear-gradient(90deg, #009900, #00b300);
+}
+
 footer {
   margin-top: 40px;
   font-size: 0.85rem;
