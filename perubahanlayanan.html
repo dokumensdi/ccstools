@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Perubahan Layanan</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, rgba(59, 130, 246, 0.20), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.18), transparent 35%),
+                #eef2f7;
+            color: #1f2937;
+            padding: 35px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header .icon {
+            width: 65px;
+            height: 65px;
+            margin: auto;
+            margin-bottom: 12px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            box-shadow: 0 12px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .header h1 {
+            font-size: 27px;
+            color: #111827;
+            margin-bottom: 7px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* MAIN GRID */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 22px;
+            color: #111827;
+        }
+
+        .card-title span {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* FORM */
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        .optional {
+            color: #9ca3af;
+            font-weight: normal;
+            font-size: 11px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            background: #f9fafb;
+            border-radius: 11px;
+            padding: 12px 13px;
+            font-size: 14px;
+            color: #111827;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        /* BUTTON */
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            border-radius: 11px;
+            padding: 12px 18px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit {
+            flex: 1;
+            color: white;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            box-shadow: 0 7px 18px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.30);
+        }
+
+        .btn-reset {
+            color: #374151;
+            background: #f3f4f6;
+        }
+
+        .btn-reset:hover {
+            background: #e5e7eb;
+        }
+
+        /* OUTPUT */
+        .output-wrapper {
+            position: relative;
+        }
+
+        .output {
+            min-height: 440px;
+            background: #111827;
+            color: #e5e7eb;
+            border-radius: 14px;
+            padding: 22px;
+            font-family: "Courier New", monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-break: break-word;
+            overflow-x: auto;
+            border: 1px solid #374151;
+        }
+
+        .output.empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 13px;
+        }
+
+        .output-header small {
+            color: #9ca3af;
+            font-size: 11px;
+        }
+
+        .btn-copy {
+            background: #10b981;
+            color: white;
+            padding: 9px 14px;
+            font-size: 12px;
+        }
+
+        .btn-copy:hover {
+            background: #059669;
+            transform: translateY(-1px);
+        }
+
+        .btn-copy.copied {
+            background: #2563eb;
+        }
+
+        /* INFO */
+        .info-box {
+            margin-top: 15px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            color: #374151;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #9ca3af;
+            font-size: 11px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .output {
+                min-height: 400px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .card {
+                padding: 18px;
+                border-radius: 15px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn-submit,
+            .btn-reset {
+                width: 100%;
+            }
+
+            .output {
+                font-size: 11px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="icon">📋</div>
+        <h1>Request Perubahan Layanan</h1>
+        <p>Form Generator Upgrade / Downgrade Layanan</p>
+    </div>
+
+    <div class="content">
+
+        <!-- FORM -->
+        <div class="card">
+
+            <div class="card-title">
+                <span>✏️</span>
+                Data Perubahan Layanan
+            </div>
+
+            <form id="serviceForm">
+
+                <!-- ID PELANGGAN -->
+                <div class="form-group">
+                    <label>
+                        ID Pelanggan <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="idPelanggan"
+                        placeholder="Contoh: 1010122034"
+                        required
+                    >
+                </div>
+
+                <!-- NAMA PELANGGAN -->
+                <div class="form-group">
+                    <label>
+                        Nama Pelanggan <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="namaPelanggan"
+                        placeholder="Masukkan nama pelanggan"
+                        required
+                    >
+                </div>
+
+                <!-- EXISTING -->
+                <div class="form-group">
+                    <label>
+                        Zervice Type Existing <span class="required">*</span>
+                    </label>
+
+                    <select id="existing" required>
+                        <option value="">-- Pilih Paket Existing --</option>
+                        <option value="Zetta up to 25Mbps">
+                            Zetta up to 25Mbps
+                        </option>
+                        <option value="Zetta up to 50Mbps">
+                            Zetta up to 50Mbps
+                        </option>
+                        <option value="Zetta up to 100Mbps">
+                            Zetta up to 100Mbps
+                        </option>
+                        <option value="Zetta up to 150Mbps">
+                            Zetta up to 150Mbps
+                        </option>
+                    </select>
+                </div>
+
+                <!-- BARU -->
+                <div class="form-group">
+                    <label>
+                        Zervice Type Baru <span class="required">*</span>
+                    </label>
+
+                    <select id="baru" required>
+                        <option value="">-- Pilih Paket Baru --</option>
+                        <option value="Zetta up to 25Mbps">
+                            Zetta up to 25Mbps
+                        </option>
+                        <option value="Zetta up to 50Mbps">
+                            Zetta up to 50Mbps
+                        </option>
+                        <option value="Zetta up to 100Mbps">
+                            Zetta up to 100Mbps
+                        </option>
+                        <option value="Zetta up to 150Mbps">
+                            Zetta up to 150Mbps
+                        </option>
+                    </select>
+                </div>
+
+                <!-- NOTE -->
+                <div class="form-group">
+                    <label>
+                        Note
+                        <span class="optional">(Opsional)</span>
+                    </label>
+
+                    <textarea
+                        id="note"
+                        placeholder="Contoh: pelanggan request paket bundling 4+2"
+                    ></textarea>
+                </div>
+
+                <!-- TANGGAL -->
+                <div class="form-group">
+                    <label>
+                        Tanggal <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="tanggal"
+                        placeholder="Contoh: 25/08/2026 09:12:00"
+                        required
+                    >
+                </div>
+
+                <!-- BUTTON -->
+                <div class="buttons">
+                    <button type="submit" class="btn-submit">
+                        ⚡ Generate Template
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-reset"
+                        onclick="resetForm()"
+                    >
+                        Reset
+                    </button>
+                </div>
+
+            </form>
+
+            <div class="info-box">
+                💡 <strong>Tips:</strong> Tanggal dapat ditulis bebas sesuai
+                kebutuhan, misalnya <b>25/08/2026 09:12:00</b>.
+            </div>
+
+        </div>
+
+
+        <!-- OUTPUT -->
+        <div class="card">
+
+            <div class="card-title">
+                <span>📄</span>
+                Hasil Template
+            </div>
+
+            <div class="output-header">
+                <small>Preview hasil request</small>
+
+                <button
+                    type="button"
+                    class="btn-copy"
+                    id="copyBtn"
+                    onclick="copyText()"
+                >
+                    📋 Copy
+                </button>
+            </div>
+
+            <div
+                id="output"
+                class="output empty"
+            >
+                Hasil template akan muncul di sini setelah tombol
+                <b>Generate Template</b> ditekan.
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Request Perubahan Layanan • Upgrade / Downgrade
+    </div>
+
+</div>
+
+
+<script>
+
+    const form = document.getElementById("serviceForm");
+    const output = document.getElementById("output");
+    const copyBtn = document.getElementById("copyBtn");
+
+
+    // ==========================================
+    // GENERATE TEMPLATE
+    // ==========================================
+
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const idPelanggan =
+            document.getElementById("idPelanggan").value.trim();
+
+        const namaPelanggan =
+            document.getElementById("namaPelanggan").value.trim();
+
+        const existing =
+            document.getElementById("existing").value;
+
+        const baru =
+            document.getElementById("baru").value;
+
+        const note =
+            document.getElementById("note").value.trim();
+
+        const tanggal =
+            document.getElementById("tanggal").value.trim();
+
+
+        // Validasi
+        if (
+            !idPelanggan ||
+            !namaPelanggan ||
+            !existing ||
+            !baru ||
+            !tanggal
+        ) {
+            alert("Mohon lengkapi data yang wajib diisi.");
+            return;
+        }
+
+
+        // Jika note kosong
+        const noteText = note || "-";
+
+
+        // ==========================================
+        // TEMPLATE OUTPUT
+        // ==========================================
+
+        const template =
+`REQUEST PERUBAHAN LAYANAN			UPGRADE/DOWNGRADE
+========================================================================
+
+ID Pelanggan		: ${idPelanggan}
+Nama Pelanggan		: ${namaPelanggan}
+
+Zervice Type Existing	: ${existing}
+Zervice Type Baru	: ${baru}
+
+========================================================================
+
+Note : ${noteText}
+
+========================================================================
+
+
+
+
+${tanggal}
+========================================================================`;
+
+
+        // Tampilkan output
+        output.textContent = template;
+
+        output.classList.remove("empty");
+
+    });
+
+
+    // ==========================================
+    // COPY TEXT
+    // ==========================================
+
+    async function copyText() {
+
+        const text = output.textContent.trim();
+
+        if (!text || output.classList.contains("empty")) {
+            alert("Silakan generate template terlebih dahulu.");
+            return;
+        }
+
+        try {
+
+            await navigator.clipboard.writeText(text);
+
+            copyBtn.textContent = "✓ Copied!";
+            copyBtn.classList.add("copied");
+
+            setTimeout(() => {
+
+                copyBtn.textContent = "📋 Copy";
+                copyBtn.classList.remove("copied");
+
+            }, 1800);
+
+        } catch (error) {
+
+            // Fallback untuk browser tertentu
+            const textarea = document.createElement("textarea");
+
+            textarea.value = text;
+
+            document.body.appendChild(textarea);
+
+            textarea.select();
+
+            document.execCommand("copy");
+
+            document.body.removeChild(textarea);
+
+            copyBtn.textContent = "✓ Copied!";
+            copyBtn.classList.add("copied");
+
+            setTimeout(() => {
+
+                copyBtn.textContent = "📋 Copy";
+                copyBtn.classList.remove("copied");
+
+            }, 1800);
+        }
+    }
+
+
+    // ==========================================
+    // RESET
+    // ==========================================
+
+    function resetForm() {
+
+        form.reset();
+
+        output.textContent =
+            "Hasil template akan muncul di sini setelah tombol Generate Template ditekan.";
+
+        output.classList.add("empty");
+
+        copyBtn.textContent = "📋 Copy";
+        copyBtn.classList.remove("copied");
+    }
+
+</script>
+
+</body>
+</html>
