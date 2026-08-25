@@ -76,6 +76,10 @@ h1 {
   background: linear-gradient(90deg, #009900, #00b300);
 }
 
+.blue2 {
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+}
+
 footer {
   margin-top: 40px;
   font-size: 0.85rem;
