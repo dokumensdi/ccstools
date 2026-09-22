@@ -60,9 +60,6 @@
         <label for="phone">Telepon:</label>
         <input type="text" id="phone" name="phone" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
         <label for="serviceType">Service Type:</label>
         <input type="text" id="serviceType" name="serviceType" required>
 
@@ -92,7 +89,6 @@
             const idCust = document.getElementById('idCust').value;
             const address = document.getElementById('address').value;
             const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
             const serviceType = document.getElementById('serviceType').value;
             const pop = document.getElementById('olt').value;
             const issue = document.getElementById('issue').value;
@@ -108,11 +104,10 @@ PIC Pelanggan	: ${picName}
 ID Cust			: ${idCust}
 Alamat			: ${address}
 Telepon			: ${phone}
-Email			: ${email}
 Service Type		: ${serviceType}
 OLT			        : ${pop}
 
-Keluhan: ${issue}
+Indikasi: ${issue}
 
 📍${location}
 
