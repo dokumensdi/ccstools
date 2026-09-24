@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lagi open tiket</title>
     <link rel="stylesheet" href="tiketstyle.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,7 +47,10 @@
             margin-bottom: 10px;
         }
 
-        /* TAMBAHAN UNTUK PILIHAN JENIS TIKET */
+        /* =========================
+           PILIHAN JENIS TIKET
+           ========================= */
+
         .ticket-type {
             display: flex;
             align-items: center;
@@ -69,6 +73,37 @@
             padding: 0;
             cursor: pointer;
         }
+
+        /* =========================
+           INSERT SHARELOC
+           ========================= */
+
+        .shareloc-button {
+            background: #ffffff;
+            color: #4f46e5;
+            border: 1px solid #4f46e5;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .shareloc-button:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .shareloc-section {
+            display: none;
+        }
+
+        .shareloc-section.active {
+            display: block;
+        }
+
+        .shareloc-button.active {
+            background: #4f46e5;
+            color: white;
+        }
     </style>
 </head>
 
@@ -78,86 +113,278 @@
 
     <form id="customerForm">
 
-        <!-- TAMBAHAN JENIS TIKET -->
+        <!-- =========================
+             JENIS TIKET
+             ========================= -->
+
         <label>Jenis Tiket:</label>
 
         <div class="ticket-type">
 
             <label class="ticket-option">
-                <input type="radio" name="ticketType" value="Project">
-                Reaksi Cepat Jatim
+                <input type="radio" name="ticketType" value="FTTH">
+                FTTH
             </label>
 
             <label class="ticket-option">
-                <input type="radio" name="ticketType" value="Maintenance">
-                Maintenance FTTH Kediri
+                <input type="radio" name="ticketType" value="Reaksi Cepat">
+                Reaksi Cepat
             </label>
 
         </div>
 
+
+        <!-- =========================
+             NOMOR TIKET
+             ========================= -->
+
         <label for="ticketNumber">Nomor Tiket:</label>
         <input type="text" id="ticketNumber" name="ticketNumber" required>
+
+
+        <!-- =========================
+             PIC PELANGGAN
+             ========================= -->
 
         <label for="picName">PIC Pelanggan:</label>
         <input type="text" id="picName" name="picName" required>
 
+
+        <!-- =========================
+             ID CUST
+             ========================= -->
+
         <label for="idCust">ID Cust:</label>
         <input type="text" id="idCust" name="idCust" required>
+
+
+        <!-- =========================
+             ALAMAT
+             ========================= -->
 
         <label for="address">Alamat:</label>
         <textarea id="address" name="address" rows="3" required></textarea>
 
+
+        <!-- =========================
+             TELEPON
+             ========================= -->
+
         <label for="phone">Telepon:</label>
         <input type="text" id="phone" name="phone" required>
+
+
+        <!-- =========================
+             SERVICE TYPE
+             ========================= -->
 
         <label for="serviceType">Service Type:</label>
         <input type="text" id="serviceType" name="serviceType" required>
 
+
+        <!-- =========================
+             OLT
+             ========================= -->
+
         <label for="olt">OLT:</label>
         <input type="text" id="olt" name="olt" required>
+
+
+        <!-- =========================
+             INDIKASI MASALAH
+             ========================= -->
 
         <label for="issue">Indikasi Masalah:</label>
         <textarea id="issue" name="issue" rows="2" required></textarea>
 
-        <label for="location">Shareloc</label>
-        <input id="location" name="location" name="location" required>
+
+        <!-- =========================
+             NAMA PENGISI FORM
+             ========================= -->
 
         <label for="filledBy">Nama Pengisi Form:</label>
         <input type="text" id="filledBy" name="filledBy" required>
 
-        <button type="button" onclick="generateTemplate()">Submit</button>
-        <button type="button" onclick="copyTemplate()">Copy Template</button>
+        <!-- =========================
+             SHARELOC
+             MUNCUL DI SINI
+             ========================= -->
+
+        <div id="sharelocSection" class="shareloc-section">
+
+            <label for="location">Shareloc:</label>
+
+            <input
+                type="url"
+                id="location"
+                name="location"
+                placeholder="https://maps.google.com/...">
+
+        </div>
+
+        <!-- =========================
+             SUBMIT
+             ========================= -->
+
+        <button type="button" onclick="generateTemplate()">
+            Submit
+        </button>
+
+
+        <!-- =========================
+             INSERT SHARELOC
+             ========================= -->
+
+        <button
+            type="button"
+            id="sharelocButton"
+            class="shareloc-button"
+            onclick="toggleShareloc()">
+            + Insert Shareloc
+        </button>
+
+
+        <!-- =========================
+             COPY TEMPLATE
+             ========================= -->
+
+        <button type="button" onclick="copyTemplate()">
+            Copy Template
+        </button>
 
     </form>
 
+
+    <!-- =========================
+         HASIL TEMPLATE
+         ========================= -->
+
     <h2>Hasil Template</h2>
+
     <div class="output" id="output"></div>
 
+
     <script>
+
+        /* ==========================================
+           INSERT / REMOVE SHARELOC
+           ========================================== */
+
+        function toggleShareloc() {
+
+            const section =
+                document.getElementById('sharelocSection');
+
+            const button =
+                document.getElementById('sharelocButton');
+
+
+            if (section.classList.contains('active')) {
+
+                // Matikan Shareloc
+                section.classList.remove('active');
+
+                button.classList.remove('active');
+
+                button.textContent =
+                    '+ Insert Shareloc';
+
+                // Kosongkan kolom Shareloc
+                document.getElementById('location').value = '';
+
+            } else {
+
+                // Aktifkan Shareloc
+                section.classList.add('active');
+
+                button.classList.add('active');
+
+                button.textContent =
+                    '− Remove Shareloc';
+            }
+        }
+
+
+        /* ==========================================
+           GENERATE TEMPLATE
+           ========================================== */
 
         function generateTemplate() {
 
             // Mengambil pilihan jenis tiket
-            const selectedTicket = document.querySelector(
-                'input[name="ticketType"]:checked'
-            );
+            const selectedTicket =
+                document.querySelector(
+                    'input[name="ticketType"]:checked'
+                );
 
-            const ticketType = selectedTicket
-                ? selectedTicket.value
-                : "";
+            const ticketType =
+                selectedTicket
+                    ? selectedTicket.value
+                    : "";
 
-            const ticketNumber = document.getElementById('ticketNumber').value;
-            const picName = document.getElementById('picName').value;
-            const idCust = document.getElementById('idCust').value;
-            const address = document.getElementById('address').value;
-            const phone = document.getElementById('phone').value;
-            const serviceType = document.getElementById('serviceType').value;
-            const pop = document.getElementById('olt').value;
-            const issue = document.getElementById('issue').value;
-            const location = document.getElementById('location').value;
-            const filledBy = document.getElementById('filledBy').value;
 
-           const template = `Dear Team ${ticketType},
+            const ticketNumber =
+                document.getElementById('ticketNumber').value;
+
+            const picName =
+                document.getElementById('picName').value;
+
+            const idCust =
+                document.getElementById('idCust').value;
+
+            const address =
+                document.getElementById('address').value;
+
+            const phone =
+                document.getElementById('phone').value;
+
+            const serviceType =
+                document.getElementById('serviceType').value;
+
+            const pop =
+                document.getElementById('olt').value;
+
+            const issue =
+                document.getElementById('issue').value;
+
+            const filledBy =
+                document.getElementById('filledBy').value;
+
+
+            /* ==========================================
+               SHARELOC
+               ========================================== */
+
+            const sharelocSection =
+                document.getElementById('sharelocSection');
+
+            const location =
+                document.getElementById('location').value;
+
+
+            let sharelocOutput = "";
+
+
+            // Shareloc hanya muncul jika:
+            // 1. Insert Shareloc aktif
+            // 2. Link Shareloc diisi
+
+            if (
+                sharelocSection.classList.contains('active') &&
+                location.trim() !== ""
+            ) {
+
+                sharelocOutput =
+                    `\n\n📍${location}`;
+
+            }
+
+
+            /* ==========================================
+               TEMPLATE AKHIR
+               ========================================== */
+
+            const template = `Dear team ${ticketType},
 Mohon bantuan pengecekan pelanggan dengan detail berikut ini:
 
 Nomor tiket		: ${ticketNumber}
@@ -169,30 +396,53 @@ Telepon			: ${phone}
 Service Type		: ${serviceType}
 OLT			: ${pop}
 
-Indikasi: ${issue}
-
-📍${location}
+Indikasi: ${issue}${sharelocOutput}
 
 Demikian kami sampaikan,
 terima kasih
 ${filledBy}`;
 
-            document.getElementById('output').textContent = template;
+
+            document.getElementById('output').textContent =
+                template;
         }
+
+
+        /* ==========================================
+           COPY TEMPLATE
+           ========================================== */
 
         function copyTemplate() {
 
-            const output = document.getElementById('output').textContent;
+            const output =
+                document.getElementById('output').textContent;
+
 
             if (output) {
 
                 navigator.clipboard.writeText(output)
-                    .then(() => alert("Template berhasil disalin ke clipboard!"))
-                    .catch(() => alert("Gagal menyalin template. Silakan coba lagi."));
+
+                    .then(() => {
+
+                        alert(
+                            "Template berhasil disalin ke clipboard!"
+                        );
+
+                    })
+
+                    .catch(() => {
+
+                        alert(
+                            "Gagal menyalin template. Silakan coba lagi."
+                        );
+
+                    });
 
             } else {
 
-                alert("Tidak ada template untuk disalin. Silakan isi formulir dan tekan Submit.");
+                alert(
+                    "Tidak ada template untuk disalin. Silakan isi formulir dan tekan Submit."
+                );
 
             }
         }
