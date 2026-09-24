@@ -11,11 +11,13 @@
             margin: 20px;
             line-height: 1.6;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
+
         input, textarea, select, button {
             width: 100%;
             margin-bottom: 10px;
@@ -23,15 +25,18 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         button {
             background-color: #007BFF;
             color: white;
             font-size: 16px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .output {
             background-color: #f8f9fa;
             padding: 15px;
@@ -40,11 +45,56 @@
             white-space: pre-wrap;
             margin-bottom: 10px;
         }
+
+        /* TAMBAHAN UNTUK PILIHAN JENIS TIKET */
+        .ticket-type {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 15px;
+        }
+
+        .ticket-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: normal;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .ticket-option input[type="radio"] {
+            width: auto;
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
+
     <h1>Form Open Tiket</h1>
+
     <form id="customerForm">
+
+        <!-- TAMBAHAN JENIS TIKET -->
+        <label>Jenis Tiket:</label>
+
+        <div class="ticket-type">
+
+            <label class="ticket-option">
+                <input type="radio" name="ticketType" value="Project">
+                Reaksi Cepat Jatim
+            </label>
+
+            <label class="ticket-option">
+                <input type="radio" name="ticketType" value="Maintenance">
+                Maintenance FTTH Kediri
+            </label>
+
+        </div>
+
         <label for="ticketNumber">Nomor Tiket:</label>
         <input type="text" id="ticketNumber" name="ticketNumber" required>
 
@@ -77,13 +127,25 @@
 
         <button type="button" onclick="generateTemplate()">Submit</button>
         <button type="button" onclick="copyTemplate()">Copy Template</button>
+
     </form>
 
     <h2>Hasil Template</h2>
     <div class="output" id="output"></div>
 
     <script>
+
         function generateTemplate() {
+
+            // Mengambil pilihan jenis tiket
+            const selectedTicket = document.querySelector(
+                'input[name="ticketType"]:checked'
+            );
+
+            const ticketType = selectedTicket
+                ? selectedTicket.value
+                : "";
+
             const ticketNumber = document.getElementById('ticketNumber').value;
             const picName = document.getElementById('picName').value;
             const idCust = document.getElementById('idCust').value;
@@ -95,7 +157,7 @@
             const location = document.getElementById('location').value;
             const filledBy = document.getElementById('filledBy').value;
 
-            const template = `Dear team,
+           const template = `Dear team ${ticketType},
 Mohon bantuan pengecekan pelanggan dengan detail berikut ini:
 
 Nomor tiket		: ${ticketNumber}
@@ -105,7 +167,7 @@ ID Cust			: ${idCust}
 Alamat			: ${address}
 Telepon			: ${phone}
 Service Type		: ${serviceType}
-OLT			        : ${pop}
+OLT			: ${pop}
 
 Indikasi: ${issue}
 
@@ -119,27 +181,23 @@ ${filledBy}`;
         }
 
         function copyTemplate() {
+
             const output = document.getElementById('output').textContent;
+
             if (output) {
+
                 navigator.clipboard.writeText(output)
                     .then(() => alert("Template berhasil disalin ke clipboard!"))
                     .catch(() => alert("Gagal menyalin template. Silakan coba lagi."));
+
             } else {
+
                 alert("Tidak ada template untuk disalin. Silakan isi formulir dan tekan Submit.");
+
             }
         }
+
     </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
